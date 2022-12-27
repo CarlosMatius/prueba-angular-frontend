@@ -1,0 +1,49 @@
+<div class="body">
+
+    <form [formGroup]="form" class="form">
+      
+      <h2 class="form__title" *ngIf="!cliente.id else elseBlocked">Crear Cliente</h2>
+      
+      <ng-template #elseBlocked>
+        <h2 class="form__title">Editar Cliente</h2>
+      </ng-template>
+      
+      <div class="form__container">
+  
+        <mat-form-field appearance="fill" class="form_element">
+          <mat-label>Nombre</mat-label>
+          <input matInput required autocomplete="off" formControlName="nombre">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form_element">
+          <mat-label>Cedula</mat-label>
+          <input matInput required autocomplete="off" formControlName="cedula">
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" class="form_element">
+          <mat-label>Correo</mat-label>
+          <input matInput required autocomplete="off" formControlName="correo">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form_element">
+          <mat-label>Telefono</mat-label>
+          <input matInput required autocomplete="off" formControlName="telefono">
+        </mat-form-field>
+  
+        <button 
+          mat-raised-button 
+          color="primary" 
+          [disabled]="form.invalid"
+          (click)="create()" *ngIf="!cliente.id else elseBlock"> Registrar </button>
+
+        <ng-template #elseBlock>
+          <button
+            mat-raised-button 
+            color="primary"
+            (click)="update()"> Actualizar </button>
+        </ng-template>
+        
+  
+      </div>
+    </form>
+  </div>

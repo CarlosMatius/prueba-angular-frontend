@@ -10,7 +10,7 @@ export class EntregaDTO {
     guia!: string;
     descuento!: number;
     precio_final!: number;
-    updateAt!: string;
+    updatedAt!: string;
     clienteNombre!: string;
     almacenamientoNombre!: string;
 }

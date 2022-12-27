@@ -1,5 +1,5 @@
 export class AlmacenamientoRequest {
-    id!: number;
+    id!:number;
     tipo!: string;
     nombre!: string;
 }

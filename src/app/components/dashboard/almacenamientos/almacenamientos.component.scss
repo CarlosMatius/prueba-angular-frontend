@@ -1,0 +1,43 @@
+.container{
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 5px;
+
+    .example-spacer {
+        flex: 1 1 auto;
+    }
+
+    .btn-add {
+        background-color: green;
+        color: white;
+        margin-right: auto;
+    }
+
+    .container__table {
+        width: 100%;
+        margin: auto;
+      
+        th {
+            font-size: 1.1rem;
+            background-color: #636eac;
+            color: #fff;
+            text-align: center;
+            border: solid 0.1px black;
+        }
+      
+        td{
+    
+            border: solid 0.3px hsl(233, 10%, 46%);
+            border: solid 0.3px hsl(233, 10%, 46%);
+            font-size: 1.09rem;
+            button{
+                padding: 0;
+                margin: auto;
+                background-color:white;
+                color: #207240;
+                border: none;
+                cursor: pointer;
+            }
+        }
+    }
+}

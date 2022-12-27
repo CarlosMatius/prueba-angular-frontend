@@ -1,0 +1,69 @@
+<div class="body">
+
+    <form [formGroup]="form" class="form">
+      
+      <h2 class="form__title" *ngIf="!entrega.id else elseBlocked">Crear Entrega</h2>
+      
+      <ng-template #elseBlocked>
+        <h2 class="form__title">Editar Entrega</h2>
+      </ng-template>
+      
+      <div class="form__container">
+
+        <mat-form-field appearance="fill" class="form_element">
+            <mat-label>Tipo Almacenamiento</mat-label>
+            <mat-select [(value)]="selectedValue" formControlName="tipo">
+                <mat-option value="MARITIMO">MARITIMO</mat-option>
+                <mat-option value="TERRESTRE">TERRESTRE</mat-option>
+            </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill" class="form_element">
+          <mat-label>Producto</mat-label>
+          <input matInput required autocomplete="off" formControlName="producto">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form_element">
+          <mat-label>Cantidad</mat-label>
+          <input matInput required autocomplete="off" formControlName="cantidad">
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" class="form_element">
+            <mat-label>Fecha Entrega</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="fecha_entrega">
+            <mat-hint>yyyy/MM/dd</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <input matInput [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+
+
+
+  
+
+
+
+
+        
+  
+        <button 
+          mat-raised-button 
+          color="primary" 
+          [disabled]="form.invalid"
+          (click)="create()" *ngIf="!entrega.id else elseBlock"> Registrar </button>
+
+        <ng-template #elseBlock>
+          <button
+            mat-raised-button 
+            color="primary"
+            (click)="update()"> Actualizar </button>
+        </ng-template>
+        
+  
+      </div>
+    </form>
+  </div>

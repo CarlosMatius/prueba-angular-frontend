@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
 const TOKEN_KEY = 'access_token';
@@ -7,7 +8,7 @@ const TOKEN_KEY = 'access_token';
 })
 export class TokenService {
 
-  constructor() { }
+  constructor(private route : Router) { }
 
   public setToken(token: string): void{
     window.sessionStorage.removeItem(TOKEN_KEY);
@@ -16,5 +17,10 @@ export class TokenService {
 
   public getToken(){
     return sessionStorage.getItem(TOKEN_KEY);
+  }
+  
+  public logOut(): void {
+    window.sessionStorage.clear();
+    this.route.navigate(['/login'])
   }
 }

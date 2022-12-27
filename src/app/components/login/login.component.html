@@ -1,0 +1,25 @@
+<div class="body">
+  <mat-spinner *ngIf="loading" class="spinner"></mat-spinner>
+  <form *ngIf="!loading" [formGroup]="form" class="form" (ngSubmit)="onLogin()">
+    <h2 class="form__title">{{title}}</h2>
+    <div class="form__container">
+
+      <mat-form-field appearance="fill" class="form_element">
+        <mat-label>Usuario</mat-label>
+        <input matInput required autocomplete="off" formControlName="client_id">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form_element">
+        <mat-label>Clave</mat-label>
+        <input matInput required [type]="hide ? 'password' : 'text'" formControlName="client_secret">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid"> Ingresar </button>
+
+    </div>
+  </form>
+</div>

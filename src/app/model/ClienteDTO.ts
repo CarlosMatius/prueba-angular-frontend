@@ -5,5 +5,5 @@ export class ClienteDTO {
     correo!: string;
     telefono!: string;
     createdAt!: string;
-    updateAt!: string;
+    updatedAt!: string;
 }

@@ -3,5 +3,5 @@ export class AlmacenamientoDTO {
     tipo! : string;
     nombre!: string;
     createdAt!: string;
-    updateAt!: string;
+    updatedAt!: string;
 }

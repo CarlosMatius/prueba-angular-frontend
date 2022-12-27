@@ -1,5 +1,5 @@
 export class ClienteRequest {
-    id!: number;
+    id!:number;
     nombre!: string;
     cedula!: string;
     correo!: string;
