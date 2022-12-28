@@ -13,8 +13,8 @@ import { Component, OnInit } from '@angular/core';
 export class CrearAlmacenamientoComponent implements OnInit{
 
   form: FormGroup;
-  almacenamiento = new AlmacenamientoRequest();
   selectedValue!: string;
+  idAlmacen!:number;
 
   constructor(
     private router: Router,
@@ -56,7 +56,7 @@ export class CrearAlmacenamientoComponent implements OnInit{
   }
 
   update(): void {
-    this.almacenamientoService.updateAlmacenamiento(this.form.value, this.almacenamiento.id).subscribe({
+    this.almacenamientoService.updateAlmacenamiento(this.form.value, this.idAlmacen).subscribe({
       next: () => {
         this.router.navigate(['/dashboard/almacenamientos']);
         this._snackBar.open("Almacen Actualizado con exito", '', {
@@ -79,10 +79,10 @@ export class CrearAlmacenamientoComponent implements OnInit{
     this.activatedRoute.params.subscribe({
       next:(c) => {
         let id=c['id'];
+        this.idAlmacen=c['id'];
         if(id) {
           this.almacenamientoService.getById(id).subscribe({
             next:(alm) => {
-              this.almacenamiento = alm
               this.form.patchValue({
                 tipo:alm.tipo,
                 nombre:alm.nombre

@@ -2,7 +2,6 @@ import { AlmacenamientoRequest } from './AlmacenamientoRequest';
 import { ClienteRequest } from './ClienteRequest';
 
 export class EntregaRequest {
-    id!:number;
     tipo!: string;
     producto!: string;
     cantidad! : number;

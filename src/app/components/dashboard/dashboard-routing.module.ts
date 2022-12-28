@@ -1,3 +1,4 @@
+import { AuthGuard } from './../../guard/auth.guard';
 import { CrearEntregaComponent } from './entregas/crear-entrega/crear-entrega.component';
 import { CrearAlmacenamientoComponent } from './almacenamientos/crear-almacenamiento/crear-almacenamiento.component';
 import { AlmacenamientosComponent } from './almacenamientos/almacenamientos.component';
@@ -11,16 +12,16 @@ import { CrearClienteComponent } from './clientes/crear-cliente/crear-cliente.co
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, children:[
-    { path: '', component: InicioComponent},
-    { path: 'clientes', component: ClientesComponent},
-    { path: 'almacenamientos', component: AlmacenamientosComponent},
-    { path: 'entregas', component: EntregasComponent},
-    { path: 'crear-cliente', component: CrearClienteComponent},
-    { path: 'editar-cliente/:id', component: CrearClienteComponent},
-    { path: 'crear-almacenamiento', component: CrearAlmacenamientoComponent},
-    { path: 'editar-almacenamiento/:id', component: CrearAlmacenamientoComponent},
-    { path: 'crear-entrega', component: CrearEntregaComponent},
-    { path: 'editar-entrega/:id', component: CrearEntregaComponent}
+    { path: '', canActivate:[AuthGuard], component: InicioComponent},
+    { path: 'clientes', canActivate:[AuthGuard], component: ClientesComponent},
+    { path: 'almacenamientos', canActivate:[AuthGuard], component: AlmacenamientosComponent},
+    { path: 'entregas', canActivate:[AuthGuard], component: EntregasComponent},
+    { path: 'crear-cliente', canActivate:[AuthGuard], component: CrearClienteComponent},
+    { path: 'editar-cliente/:id', canActivate:[AuthGuard], component: CrearClienteComponent},
+    { path: 'crear-almacenamiento', canActivate:[AuthGuard], component: CrearAlmacenamientoComponent},
+    { path: 'editar-almacenamiento/:id', canActivate:[AuthGuard], component: CrearAlmacenamientoComponent},
+    { path: 'crear-entrega', canActivate:[AuthGuard], component: CrearEntregaComponent},
+    { path: 'editar-entrega/:id', canActivate:[AuthGuard], component: CrearEntregaComponent}
   ]}
 ];
 

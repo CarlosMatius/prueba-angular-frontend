@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class CrearClienteComponent implements OnInit{
   
   form: FormGroup;
-  cliente = new ClienteRequest();
+  idCliente!:number;
 
   constructor(
     private router: Router,
@@ -56,7 +56,7 @@ export class CrearClienteComponent implements OnInit{
   }
 
   update(): void {
-    this.clienteService.updateCliente(this.form.value, this.cliente.id).subscribe({
+    this.clienteService.updateCliente(this.form.value, this.idCliente).subscribe({
       next: () => {
         this.router.navigate(['/dashboard/clientes']);
         this._snackBar.open("Cliente Actualizado con exito", '', {
@@ -79,10 +79,10 @@ export class CrearClienteComponent implements OnInit{
     this.activatedRoute.params.subscribe({
       next:(c) => {
         let id=c['id'];
+        this.idCliente=c['id'];
         if(id) {
           this.clienteService.getById(id).subscribe({
             next:(cli) => {
-              this.cliente = cli
               this.form.patchValue({
                 nombre:cli.nombre,
                 cedula:cli.cedula,

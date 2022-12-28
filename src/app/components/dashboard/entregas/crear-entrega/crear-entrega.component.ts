@@ -1,3 +1,4 @@
+import { ClienteRequest } from './../../../../model/ClienteRequest';
 import { AlmacenamientoDTO } from './../../../../model/AlmacenamientoDTO';
 import { ClienteDTO } from './../../../../model/ClienteDTO';
 import { EntregaDTO } from './../../../../model/EntregaDTO';
@@ -6,7 +7,7 @@ import { EntregaService } from './../../../../service/entrega.service';
 import { AlmacenamientoService } from './../../../../service/almacenamiento.service';
 import { ClienteService } from './../../../../service/cliente.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, NonNullableFormBuilder } from '@angular/forms';
 import { EntregaRequest } from './../../../../model/EntregaRequest';
 import { Component, OnInit } from '@angular/core';
 
@@ -19,9 +20,7 @@ export class CrearEntregaComponent implements OnInit{
 
   form: FormGroup;
   selectedTipo!: string;
-  entrega = new EntregaRequest();
-  entregaDTO = new EntregaDTO();
-
+  idEntrega!:number;
   clientes! : ClienteDTO[];
   almacenes! : AlmacenamientoDTO[];
 
@@ -41,17 +40,15 @@ export class CrearEntregaComponent implements OnInit{
       fecha_entrega: ['',Validators.required],
       precio_envio: ['',Validators.required],
       dato_vehiculo: ['',Validators.required],
-      guia: ['',Validators.required],
+      guia: [ this.generarGuia(10),Validators.required],
       cliente: ['',Validators.required],
       almacenamiento: ['',Validators.required]
     })
   }
-
   ngOnInit(): void {
     this.cargarDatos();
     this.clienteSelect();
     this.almacenSelect();
-
   }
 
   clienteSelect(): void {
@@ -92,7 +89,7 @@ export class CrearEntregaComponent implements OnInit{
   }
 
   update(): void {
-    this.entregaService.updateEntrega(this.form.value, this.entregaDTO.id).subscribe({
+    this.entregaService.updateEntrega(this.form.value, this.idEntrega).subscribe({
       next: () => {
         this.router.navigate(['/dashboard/entregas']);
         this._snackBar.open("Entrega Actualizada con exito", '', {
@@ -115,10 +112,10 @@ export class CrearEntregaComponent implements OnInit{
     this.activatedRoute.params.subscribe({
       next:(c) => {
         let id=c['id'];
+        this.idEntrega=c['id'];
         if(id) {
           this.entregaService.getById(id).subscribe({
             next:(ent) => {
-              this.entregaDTO = ent
               this.form.patchValue({
                 tipo:ent.tipo,
                 producto:ent.producto,
@@ -126,12 +123,31 @@ export class CrearEntregaComponent implements OnInit{
                 fecha_entrega:ent.fecha_entrega,
                 precio_envio:ent.precio_envio,
                 dato_vehiculo:ent.dato_vehiculo,
-                guia:ent.guia
+                guia:ent.guia,
+                cliente:ent.cliente,
+                almacenamiento:ent.almacenamiento
               })
             }
           })
         }
       }
     })
+  }
+
+  compareCliente(o1: ClienteDTO, o2: ClienteDTO) {
+    return o1 && o2 && o1.nombre === o2.nombre
+  }
+
+  compareAlmacen(o1: AlmacenamientoDTO, o2: AlmacenamientoDTO) {
+    return o1 && o2 && o1.nombre === o2.nombre
+  }
+
+  generarGuia(n: number): string {
+    let result = '';
+    const chars = 'ab0cd1ef2gh3ij4kl5mn6op7qr8st9uvwxyz'
+    for (let i = 0; i < n; i++){
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
   }
 }

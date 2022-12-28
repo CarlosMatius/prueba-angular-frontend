@@ -5,7 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AlmacenamientoDTO } from './../../../model/AlmacenamientoDTO';
 import { Component, AfterViewInit, OnInit, ViewChild } from '@angular/core';
 
-
 @Component({
   selector: 'app-almacenamientos',
   templateUrl: './almacenamientos.component.html',
@@ -37,8 +36,8 @@ export class AlmacenamientosComponent implements AfterViewInit, OnInit{
     this.dataSource.paginator = this.paginator;
   }
 
-  delete(almacenamiento: AlmacenamientoDTO):void {
-    this.almacenamientoService.deleteAlmacenamiento(almacenamiento.id).subscribe({
+  delete(id: number):void {
+    this.almacenamientoService.deleteAlmacenamiento(id).subscribe({
       next: () => {
         this.almacenamientoService.getAlmacenamientos().subscribe({
           next: (res) => {
@@ -60,5 +59,4 @@ export class AlmacenamientosComponent implements AfterViewInit, OnInit{
       }
     })
   }
-
 }

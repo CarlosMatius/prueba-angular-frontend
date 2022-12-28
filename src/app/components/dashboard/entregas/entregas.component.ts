@@ -53,8 +53,13 @@ export class EntregasComponent implements AfterViewInit, OnInit{
     this.dataSource.paginator = this.paginator;
   }
 
-  delete(entrega: EntregaDTO):void {
-    this.entregaService.deleteEntrega(entrega.id).subscribe({
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  delete(id:number):void {
+    this.entregaService.deleteEntrega(id).subscribe({
       next: () => {
         this.entregaService.getEntregas().subscribe({
           next: (res) => {

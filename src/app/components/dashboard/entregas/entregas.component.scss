@@ -1,4 +1,4 @@
-.container{
+.container {
     margin-left: 30px;
     margin-right: 30px;
     margin-top: 5px;
@@ -13,31 +13,35 @@
         margin-right: auto;
     }
 
-    .container__table {
+    mat-form-field {
+        font-size: 14px;
         width: 100%;
-        margin: auto;
-      
+    }
+
+    table{
+        width: 100%;
+        margin-top: 10px;
+
         th {
-            font-size: 1.1rem;
             background-color: #636eac;
             color: #fff;
             text-align: center;
             border: solid 0.1px black;
         }
-      
-        td{
-    
+
+        td {
             border: solid 0.3px hsl(233, 10%, 46%);
             border: solid 0.3px hsl(233, 10%, 46%);
-            font-size: 1.09rem;
-            button{
+            text-align: center;
+
+            .iconos {
                 padding: 0;
                 margin: auto;
-                background-color:white;
+                background-color: white;
                 color: #207240;
                 border: none;
                 cursor: pointer;
             }
         }
-    }
+    }   
 }

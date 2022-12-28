@@ -19,7 +19,8 @@ export class ClientesComponent implements AfterViewInit, OnInit{
 
   constructor(
     private clienteService: ClienteService,
-    private _snackBar: MatSnackBar){}
+    private _snackBar: MatSnackBar
+  ){}
 
   ngOnInit(): void {
     this.clienteService.getClientes().subscribe({
@@ -35,8 +36,8 @@ export class ClientesComponent implements AfterViewInit, OnInit{
     this.dataSource.paginator = this.paginator;
   }
 
-  delete(cliente: ClienteDTO):void {
-    this.clienteService.deleteCliente(cliente.id).subscribe({
+  delete(id: number):void {
+    this.clienteService.deleteCliente(id).subscribe({
       next: () => {
         this.clienteService.getClientes().subscribe({
           next: (res) => {

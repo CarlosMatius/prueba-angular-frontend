@@ -1,3 +1,5 @@
+import { AlmacenamientoDTO } from './AlmacenamientoDTO';
+import { ClienteDTO } from './ClienteDTO';
 export class EntregaDTO {
     id!: number;
     tipo!: string;
@@ -11,6 +13,6 @@ export class EntregaDTO {
     descuento!: number;
     precio_final!: number;
     updatedAt!: string;
-    clienteNombre!: string;
-    almacenamientoNombre!: string;
+    cliente!: ClienteDTO;
+    almacenamiento!: AlmacenamientoDTO;
 }
