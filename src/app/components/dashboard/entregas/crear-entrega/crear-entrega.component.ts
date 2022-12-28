@@ -1,3 +1,5 @@
+import { AlmacenamientoDTO } from './../../../../model/AlmacenamientoDTO';
+import { ClienteDTO } from './../../../../model/ClienteDTO';
 import { EntregaDTO } from './../../../../model/EntregaDTO';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EntregaService } from './../../../../service/entrega.service';
@@ -16,9 +18,12 @@ import { Component, OnInit } from '@angular/core';
 export class CrearEntregaComponent implements OnInit{
 
   form: FormGroup;
-  selectedValue!: string;
+  selectedTipo!: string;
   entrega = new EntregaRequest();
   entregaDTO = new EntregaDTO();
+
+  clientes! : ClienteDTO[];
+  almacenes! : AlmacenamientoDTO[];
 
   constructor(
     private router: Router,
@@ -44,6 +49,25 @@ export class CrearEntregaComponent implements OnInit{
 
   ngOnInit(): void {
     this.cargarDatos();
+    this.clienteSelect();
+    this.almacenSelect();
+
+  }
+
+  clienteSelect(): void {
+    this.clienteService.getClientes().subscribe({
+      next:(datos) => {
+        this.clientes= datos
+      }
+    })
+  }
+
+  almacenSelect(): void {
+    this.almacenamientoService.getAlmacenamientos().subscribe({
+      next:(datos) => {
+        this.almacenes= datos
+      }
+    })
   }
 
   create(): void {
@@ -59,17 +83,16 @@ export class CrearEntregaComponent implements OnInit{
       },
       error: (err) => {
         this._snackBar.open(err.error.message, '', {
-          duration: 2000,
+          duration: 5000,
           horizontalPosition: 'center',
           verticalPosition: 'bottom'
         })
       }
-
     })
   }
 
   update(): void {
-    this.entregaService.updateEntrega(this.form.value, this.entrega.id).subscribe({
+    this.entregaService.updateEntrega(this.form.value, this.entregaDTO.id).subscribe({
       next: () => {
         this.router.navigate(['/dashboard/entregas']);
         this._snackBar.open("Entrega Actualizada con exito", '', {
@@ -80,7 +103,7 @@ export class CrearEntregaComponent implements OnInit{
       },
       error: (err) => {
         this._snackBar.open(err.error.message, '', {
-          duration: 2000,
+          duration: 5000,
           horizontalPosition: 'center',
           verticalPosition: 'bottom'
         })

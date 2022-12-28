@@ -2,7 +2,7 @@
 
     <form [formGroup]="form" class="form">
       
-      <h2 class="form__title" *ngIf="!entrega.id else elseBlocked">Crear Entrega</h2>
+      <h2 class="form__title" *ngIf="!entregaDTO.id else elseBlocked">Crear Entrega</h2>
       
       <ng-template #elseBlocked>
         <h2 class="form__title">Editar Entrega</h2>
@@ -12,7 +12,7 @@
 
         <mat-form-field appearance="fill" class="form_element">
             <mat-label>Tipo Almacenamiento</mat-label>
-            <mat-select [(value)]="selectedValue" formControlName="tipo">
+            <mat-select [(value)]="selectedTipo" formControlName="tipo">
                 <mat-option value="MARITIMO">MARITIMO</mat-option>
                 <mat-option value="TERRESTRE">TERRESTRE</mat-option>
             </mat-select>
@@ -31,30 +31,48 @@
         <mat-form-field appearance="fill" class="form_element">
             <mat-label>Fecha Entrega</mat-label>
             <input matInput [matDatepicker]="picker" formControlName="fecha_entrega">
-            <mat-hint>yyyy/MM/dd</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
-        <input matInput [matDatepicker]="picker">
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <mat-form-field appearance="fill" class="form_element">
+          <mat-label>Precio Envio</mat-label>
+          <input matInput required autocomplete="off" formControlName="precio_envio">
+        </mat-form-field>
 
+        <mat-form-field appearance="fill" class="form_element">
+          <mat-label>Vehiculo</mat-label>
+          <input matInput required autocomplete="off" formControlName="dato_vehiculo">
+        </mat-form-field>
 
+        <mat-form-field appearance="fill" class="form_element">
+          <mat-label>Guia</mat-label>
+          <input matInput required autocomplete="off" formControlName="guia">
+        </mat-form-field>
 
-  
+        <mat-form-field appearance="fill" class="form_element">
+          <mat-label>Cliente</mat-label>
+          <mat-select formControlName="cliente">
+            <mat-option *ngFor="let cliente of clientes" [value]="cliente">
+              {{cliente.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-
-
-
-        
+        <mat-form-field appearance="fill" class="form_element">
+          <mat-label>Almacen</mat-label>
+          <mat-select formControlName="almacenamiento">
+            <mat-option *ngFor="let almacen of almacenes" [value]="almacen">
+              {{almacen.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
   
         <button 
           mat-raised-button 
           color="primary" 
           [disabled]="form.invalid"
-          (click)="create()" *ngIf="!entrega.id else elseBlock"> Registrar </button>
+          (click)="create()" *ngIf="!entregaDTO.id else elseBlock"> Registrar </button>
 
         <ng-template #elseBlock>
           <button

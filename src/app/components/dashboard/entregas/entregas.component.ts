@@ -14,19 +14,19 @@ export class EntregasComponent implements AfterViewInit, OnInit{
 
   displayedColumns: string[] = [
     'Id', 
-    'Tipo', 
+    'Tipo Envio', 
     'Producto', 
     'Cantidad', 
     'Fecha Registro', 
-    'Fecha Entrega', 
+    'Fecha Entrega',
+    'Vehiculo',
+    'Guia',
     'Precio Envio', 
-    'Vehiculo', 
-    'Guia', 
     'Descuento', 
-    'Precio Final', 
-    'Actualizado', 
+    'Precio Final',
     'Cliente', 
     'Almacen', 
+    'Actualizado',
     'Editar', 
     'Eliminar'
   ];
@@ -69,7 +69,7 @@ export class EntregasComponent implements AfterViewInit, OnInit{
       },
       error: (err) => {
         this._snackBar.open(err.error.message, '', {
-          duration: 2000,
+          duration: 5000,
           horizontalPosition: 'center',
           verticalPosition: 'bottom'
         })

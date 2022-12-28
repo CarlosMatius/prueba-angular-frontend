@@ -53,7 +53,7 @@ export class AlmacenamientosComponent implements AfterViewInit, OnInit{
       },
       error: (err) => {
         this._snackBar.open(err.error.message, '', {
-          duration: 2000,
+          duration: 5000,
           horizontalPosition: 'center',
           verticalPosition: 'bottom'
         })

@@ -1,26 +1,30 @@
 .body{
     display: flex;
     justify-content: center;
-    height: 90%;
+    margin: auto;
+    margin-top: 10px;
     align-items: center;
 }
 
 .form{
     border-radius: 10px;
     box-shadow: 0 5px 10px 5px rgb(0 0 0 / 30%);
-    max-width: 350px;
-    padding: 3.5em 3em;
+    max-width: 400px;
+    padding: 1.5em 2em;
     text-align: center;
 
     .form__title{
-        font-size: 2rem;
+        font-size: 1.3rem;
         margin-bottom: .5em;
     }
 
     .form_element{
         width: 100%;
         background: none;
-        font-size: 1rem;
-        padding: .6em .3em;
+        font-size: .9rem;
+    }
+
+    .form_element{
+        margin-top: -15px;
     }
 }
